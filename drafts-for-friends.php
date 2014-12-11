@@ -17,32 +17,32 @@ if ( ! class_exists( 'DraftsForFriends' ) ):
 class DraftsForFriends	{
 
 	function __construct(){
-    	add_action('init', array( &$this, 'init') );
+    		add_action('init', array( &$this, 'init') );
 	}
 
 	function init() {
 		global $current_user;
 
 		if(!session_id()) {
-	        session_start();
+	        	session_start();
 
-	        if (! $_SESSION['submitted_form_ids'] ) {
-	        	$_SESSION['submitted_form_ids'] = array();
-	        }
-	    }
+		        if (! $_SESSION['submitted_form_ids'] ) {
+		        	$_SESSION['submitted_form_ids'] = array();
+		        }
+		}
 
 		add_action('admin_menu', array( $this, 'add_admin_pages') );
 		add_filter('the_posts', array( $this, 'the_posts_intercept') );
 		add_filter('posts_results', array( $this, 'posts_results_intercept') );
-
+	
 		$this->admin_options = $this->get_admin_options();
-
+	
 		$this->user_options = ($current_user->id > 0 && 
 			isset( $this->admin_options[$current_user->id]) ) ? $this->admin_options[$current_user->id] : 
 				array();
-
+	
 		$this->save_admin_options();
-
+	
 		$this->load_scripts_and_stylesheets();
 	}
 
@@ -74,15 +74,15 @@ class DraftsForFriends	{
 		return is_array( $saved_options ) ? $saved_options : array();
 	}
 
-    function save_admin_options(){
-        global $current_user;
-
-        if ( $current_user->id > 0 ) {
-            $this->admin_options[$current_user->id] = $this->user_options;
-        }
-
-        update_option( 'shared', $this->admin_options );
-    }
+	function save_admin_options(){
+		global $current_user;
+	
+		if ( $current_user->id > 0 ) {
+		    $this->admin_options[$current_user->id] = $this->user_options;
+		}
+	
+		update_option( 'shared', $this->admin_options );
+	}
 
 	function add_admin_pages(){
 		add_submenu_page('edit.php', __('Drafts for Friends', 'draftsforfriends'), 
@@ -98,8 +98,8 @@ class DraftsForFriends	{
 		if ( ! isset( $form['post_id'] ) || ! current_user_can( 'publish_pages' ) ||
 				! wp_verify_nonce( $form['nonce'], 'draftsforfriends_frontend_share' ) ) {
 			$_POST['error'] = true;
-	        return __('Sorry, there was an error. Please contact the plugin developer', 
-	        	'draftsforfriends');
+	        	return __('Sorry, there was an error. Please contact the plugin developer', 
+	        		'draftsforfriends');
 		}
 
 		if ( $this->same_form_was_submitted_already( $form['unique_form_id'] ) )  {
@@ -110,8 +110,8 @@ class DraftsForFriends	{
 		foreach ($this->get_shared_drafts() as $shared_draft) {
   	 		if ($shared_draft['id'] == $form['post_id']) {
  				$_POST['error'] = true;
- 		        return __('A shared draft for this post already exists, please extend it', 
- 		        	'draftsforfriends');
+ 		        	return __('A shared draft for this post already exists, please extend it', 
+ 		        		'draftsforfriends');
 	  	 	}   
 		}
 
@@ -137,7 +137,8 @@ class DraftsForFriends	{
 		$this->user_options['shared'][] = array(
 			'id' => $post->ID,
 			'expires' => time() + $this->get_extended_time_from_form($form),
-			'key' => wp_generate_password( 8, false, false ) );
+			'key' => wp_generate_password( 8, false, false ) 
+		);
 		
 		$this->save_admin_options();
 
@@ -176,8 +177,8 @@ class DraftsForFriends	{
 				! current_user_can( 'publish_pages' ) || ! isset( $params['unique_form_id'] ) ||
 				! wp_verify_nonce( $params['nonce'], 'draftsforfriends_frontend_extend' )) {
 			$_POST['error'] = true;
-	        return __('Sorry, there was an error. Please contact the plugin developer', 
-	        	'draftsforfriends');
+	        	return __('Sorry, there was an error. Please contact the plugin developer', 
+	        		'draftsforfriends');
 		}
 
 		if ( $this->same_form_was_submitted_already( $params['unique_form_id']) )  {
