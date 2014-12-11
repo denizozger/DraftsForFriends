@@ -1,0 +1,110 @@
+/**
+* 1.0 Tables
+*
+* Contains media queries that display important elements and hide others 
+*/
+
+#drafts-for-friends .centered { 
+	text-align: center; 
+	vertical-align: middle;
+}
+
+#drafts-for-friends thead th { 
+	font-weight: bold;
+}
+
+#drafts-for-friends tbody tr:hover {
+   background-color: #f9f9f9;
+}
+
+#drafts-for-friends tbody tr:last-child {
+   border-bottom: none;
+}
+
+#drafts-for-friends tbody td {
+   border-bottom: 1px solid #e5e5e5;
+}
+
+#drafts-for-friends .post-id {
+   text-align: center;
+}
+
+@media (max-width: 768px) {
+
+	#drafts-for-friends table {
+		table-layout: fixed;
+	}
+
+	#drafts-for-friends .url {
+		width: 30%;
+	}
+
+	#drafts-for-friends td.url {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	#drafts-for-friends .post-id {
+		display: none;
+	}
+}
+
+/**
+* 2.0 Forms
+*/
+
+#drafts-for-friends .extend-form { 
+	display: none;
+	white-space: nowrap; 
+}
+
+#drafts-for-friends .extend-form * { 
+	vertical-align: middle;
+}
+
+#drafts-for-friends .share-form *,
+#drafts-for-friends .extend-form * {
+	font-size: inherit;
+}
+
+#drafts-for-friends .share-form { 
+	background-color: white;
+	border: 1px solid #e5e5e5;
+	padding: 0.5em 1em;
+}
+
+#drafts-for-friends .share-form input[type="submit"] {  
+	margin: 0px 0.1em;
+}
+
+#drafts-for-friends .share-form select,
+#drafts-for-friends .share-form input { 
+	vertical-align: middle;
+}
+
+#drafts-for-friends .user-controls { 
+	background-color: rgba(0, 0 ,0 , .07);
+}
+
+/**
+* 3.0 Buttons
+*/
+#drafts-for-friends .warning {
+	color: #d98500;
+}
+
+#drafts-for-friends .warning:hover {
+	color: orange;
+}
+
+#drafts-for-friends .danger {
+	/*color: #d9534f;*/
+	color: #a00;
+}
+
+#drafts-for-friends .danger:hover {
+	/*color: #c9302c;*/
+	color: red;
+}
+
