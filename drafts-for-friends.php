@@ -81,9 +81,6 @@ class DraftsForFriends	{
             $this->admin_options[$current_user->id] = $this->user_options;
         }
 
-        // print_r($this->admin_options);
-        // print_r($current_user->id);
-
         update_option( 'shared', $this->admin_options );
     }
 
@@ -145,9 +142,6 @@ class DraftsForFriends	{
 		$this->save_admin_options();
 
 		array_push($_SESSION['submitted_form_ids'], $form['unique_form_id']);
-
-		print_r($_SESSION);
-		// print_r($_SESSION['submitted_form_ids']);
 
 		return __('Draft has been shared', 'draftsforfriends');
 	}
